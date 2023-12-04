@@ -1,8 +1,8 @@
 library(readr)
 library(dplyr)
-setwd("~/Documents/CertProy/NuevoAnalisis")
-BDD1 <- read_csv("BDD1.csv")
-BDD2 <- read_csv("BDD2.csv")
+setwd("~/Desktop/MiGithub/SoloDerecho")
+BDD1 <- read_csv("BDD/BDD1.csv")
+BDD2 <- read_csv("BDD/BDD2.csv")
 View(BDD1)
 View(BDD2)
 #<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
@@ -29,10 +29,13 @@ MiBDD$Nombre_Carrera <- factor(MiBDD$Nombre_Carrera,
                                           'ISEI','ISENER','Modelacion','Nutricion','Promocion','ProtCivil'))
 summary(MiBDD$Nombre_Carrera)
 
-BDD_CyT <- MiBDD%>% filter(MiBDD$Nombre_Carrera=="Derecho")
-summary(BDD_CyT)
-View(BDD_CyT)
-misdatos <- BDD_CyT
+BDD_Derecho <- MiBDD%>% filter(MiBDD$Nombre_Carrera=="Derecho")
+summary(BDD_Derecho)
+View(BDD_Derecho)
+misdatos <- BDD_Derecho
+save.image("Wkspaces/Checkpoint1.RData")
+write.csv(BDD_Derecho,"BDD/BDD_Derecho.csv")
+summary(BDD_Derecho)
 #<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
 misdatos$GEN <- factor(misdatos$GEN,
                        levels = c('01','02','03','04','05','06','07','08','09','10','11','12',
@@ -126,15 +129,17 @@ TemasSelectos <- todasmismaterias;materia <- TemasSelectos[1]; n <- length(Temas
 ListaTemasSelectos <- c(); ListaTemasSelectos[1] <- materia; Materia2 <- c()
 for(i in 2:n){
   Materia2 <- TemasSelectos[i]
-  if(materia==Materia2){materia <- Materia2;}else{ListaTemasSelectos[k]<- Materia2;materia <- Materia2; k <- k+1}}
+  if(materia==Materia2){materia <- Materia2;}else{ListaTemasSelectos[k]<- Materia2;materia <- Materia2; k <- k+1}
+  }
 #<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
 typeof(ListaTemasSelectos); length(ListaTemasSelectos)
 temp <- factor(ListaTemasSelectos); niveles <- levels(temp)
 misdatos$Tema_Especifico <- factor(misdatos$Tema_Especifico, levels = niveles,labels = ListaTemasSelectos)
 summary(misdatos$Tema_Especifico); View(as.data.frame(table(misdatos$Tema_Especifico)))
 #<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
+save.image("Wkspaces/Checkpoint2.RData")
 #<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
-write.csv(misdatos,"BDDProyCertCBCyT.csv")
+write.csv(misdatos,"BDD/BDD_Derecho.csv")
 # misdatos es la base de datos original
 MyDataBase <- misdatos; 
 #<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
@@ -155,6 +160,9 @@ for(i in 1:n){
 #<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
 print(periodo)
 Checking <- cbind(Checking,periodo); View(Checking)
+#<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
+save.image("Wkspaces/Checkpoint3.RData")
+write.csv(misdatos,"BDD/BDD_Derecho.csv")
 #<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
 SubBDD <- c(); SubBDD <- cbind(misdatos,anho,periodo); summary(SubBDD); View(SubBDD)
 summary(SubBDD); colnames(SubBDD)
@@ -178,28 +186,37 @@ summary(MiBDD)
 NumMaterias <- length(MiBDD$Materias); MateriaSelecc <- sort(MiBDD$Materias)
 head(MateriaSelecc,15)
 #<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
-save.image("Repositorio/Wkspace0.RData")
+save.image("Wkspaces/Checkpoint4.RData")
 #<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
 print(MateriaSelecc)
 print(MiBDD$Materias)
 #<==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
+write.csv(MiBDD,"BDD/SubBDD_Derecho.csv")
 library(dplyr)
 NumMaterias    <- length(MiBDD$Materias); MateriaSelecc  <- sort(MiBDD$Materias)
 #---------------------------------------------------------
 milista <- c(1,6,8,9,12,17,18,20,23,27,28,30,31,38,39,
              49,50,75,80,81,83,84,85,115,116,122,123,
              124,125,126,127,131,142,143,153,157,166,
-             168,170,171,174,175,177,178,181,182,185,189,191,
-             196,200,202,207,221,224,228,235,244,245,
-             248,249,251,252,253,255,263,264,265,270,
-             271,272,273,274,276,277,279,281,284,286,
-             292,297,306,307,309,311,312,313,318,322,
-             337,338,341,342,343,344,346,347,348,349,
-             352,353,355,361,365,378,381,382,385,394,
-             401,403,406,410,412,413,414,415,416,417,
-             418,420,421,422,424,427,429,430,435,437,
+             168,170,171,174,175,177,178,181,182,185,186,
+             187,188,189,190,191,192,193,194,195,
+             196,198,199,200,202,207,211,212,213,214,215,217,
+             218,219,220,221,222,223,224,226,227,228,233,235,237,
+             238,239,240,241,242,243,244,
+             248,249,250,251,252,253,255,258,261,263,264,265,270,
+             271,272,273,274,276,277,279,281,282,283,284,285,286,
+             287,288,289,290,291,292,293,297,299,300,301,302,306,
+             307,308,309,310,
+             311,312,313,314,315,316,317,318,321,322,323,324,325,
+             326,327,328,329,334,
+             337,338,341,342,343,344,346,347,348,349,350,
+             352,353,353,355,356,358,359,361,365,366,367,378,
+             380,381,382,383,384,385,393,394,
+             401,403,406,408,409,410,412,413,414,415,416,417,
+             418,419,420,421,422,424,425,426,427,428,429,430,435,437,
              442,448,449,452,465,466)
-m <- length(milista); print(milista);N <- length(ListaTemasSelectos); print(N);
+m <- length(milista); print(milista);
+N <- length(ListaTemasSelectos); print(N);
 K <- N-m; print(K);ProbaMatrix <- matrix(0,K,9)
 colnames(ProbaMatrix) <- c('Materia','ProbCert1a',
                            'NumMaxIntentosNuncaCert','IntentosPromNuncaCert',
@@ -211,12 +228,12 @@ lista <- seq(1,N); print(lista); listareducida <-lista[-milista]; print(listared
 NumMaterias    <- length(MiBDD$Materias); MateriaSelecc  <- sort(MiBDD$Materias)
 #---------------------------------------------------------
 #<==> <==> <==> <==> > <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> <==> 
-contador <-1;NumIter <- listareducida[contador];MaxIter <- 506
+contador <-1;NumIter <- listareducida[contador];MaxIter <- length(listareducida)
 NumIter <- 2
 contador <- 84
 contador <- NumIter+1
 contador <- 467
-contador <- 13
+contador <- 183
 while (contador <= MaxIter) {
   #---------------------------------------------------------
   # INICIA LA ITERACION

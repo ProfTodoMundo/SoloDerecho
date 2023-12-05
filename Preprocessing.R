@@ -392,50 +392,51 @@ ModaIntSiCert    <- MPG[order(MPG$ModeIntSiCert,decreasing= TRUE), ];    View(Mo
 MediaNuncaCert   <- MPG[order(MPG$MeanIntNuncaCert,decreasing= TRUE), ]; View(MediaNuncaCert);  # si
 MediaIntSiCert   <- MPG[order(MPG$MeanIntSiCert,decreasing= TRUE), ];    View(MediaIntSiCert)   # si
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+library(xtable)
 #<<==>><<==>><<==>><<==<<==>><<==>><<==>><<==>><<==>><<==<<==>><<==>><<==>><<==>><<==>><<==<<==>><<==>>
 ResProbCertPrimera <- ResProbCert1a %>% filter(ResProbCert1a$ProbCert1a>=0.9); View(ResProbCertPrimera)
 ResProbCertPrimera <- ResProbCertPrimera[,c(1,2)]; View(ResProbCertPrimera);
 ResProbCertPrimera <- as.data.frame(ResProbCertPrimera); View(ResProbCertPrimera)
-##write.csv(ResProbCertPrimera,'CSVFiles/ResultadosProbCertPrimera.csv')
+write.csv(ResProbCertPrimera,'CSVFiles/ResultadosProbCertPrimera.csv')
 xtable(ResProbCertPrimera,type="latex")#,file="Tablas/TablaRPCPrimera.tex")
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ResProbNuncaCertPrimeros <- ResProbNuncaCert %>% filter(ResProbNuncaCert$ProbNuncaCert>=0.75);
 ResProbNuncaCertPrimeros <- ResProbNuncaCertPrimeros[,c(1,3,4)]; View(ResProbNuncaCertPrimeros)
-#write.csv(ResProbNuncaCertPrimeros,'CSVFiles/ResultadosProbNuncaCert.csv')
+write.csv(ResProbNuncaCertPrimeros,'CSVFiles/ResultadosProbNuncaCert.csv')
 xtable(ResProbNuncaCertPrimeros,type="latex")#,file="Tablas/TablaRPNuncaCPrimera.tex")
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ResMaxIntCert <- MaxIntCert %>% filter(MaxIntCert$MaxIntSiCert>=4);
 ResMaxIntCert <- ResMaxIntCert[,c(1,8,9,11)]; View(ResMaxIntCert)
-#write.csv(ResMaxIntCert,'CSVFiles/ResultadosMaximIntCertifica.csv')
+write.csv(ResMaxIntCert,'CSVFiles/ResultadosMaximIntCertifica.csv')
 xtable(ResMaxIntCert,type="latex")#,file="Tablas/TablaMaxIC.tex")
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ResMaxIntNuncaCert <- MaxIntNuncaCertif%>% filter(MaxIntNuncaCertif$MaxIntNuncaCert>=4);
 ResMaxIntNuncaCert <- ResMaxIntNuncaCert[,c(1,4,5,2,7)]; View(ResMaxIntNuncaCert);
-#write.csv(ResMaxIntNuncaCert,'CSVFiles/ResultadosMaxIntNuncaCert.csv')
+write.csv(ResMaxIntNuncaCert,'CSVFiles/ResultadosMaxIntNuncaCert.csv')
 xtable(ResMaxIntNuncaCert,type="latex")#,file="Tablas/TablaRMaxINC.tex")
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ResModaIntNuncaCert <- ModaIntNuncaCert%>% filter(ModaIntNuncaCert$ModeIntNuncaCert>=2);
 ResModaIntNuncaCert <- ResModaIntNuncaCert[, c(1,7,3,4)]; View(ResModaIntNuncaCert); 
-#write.csv(ResModaIntNuncaCert,'CSVFiles/ResultadosModaIntNuncaCer.csv')
+write.csv(ResModaIntNuncaCert,'CSVFiles/ResultadosModaIntNuncaCer.csv')
 xtable(ResModaIntNuncaCert,type="latex")#,file="Tablas/TablaRModaINC.tex")
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ResModaIntSiCert <- ModaIntSiCert%>% filter(ModaIntSiCert$MaxIntSiCert>=2);
 ResModaIntSiCert <- ResModaIntSiCert[, c(1,11,8,9)]; View(ResModaIntSiCert); 
-#write.csv(ResModaIntSiCert,'CSVFiles/ResultadosModaIntSiCert.csv')
+write.csv(ResModaIntSiCert,'CSVFiles/ResultadosModaIntSiCert.csv')
 xtable(ResModaIntSiCert,type="latex")#,file="Tablas/TablaRModaISC.tex")
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ResMediaNuncaCert <- MediaNuncaCert%>% filter(MediaNuncaCert$MeanIntNuncaCert>=2);
 ResMediaNuncaCert <-ResMediaNuncaCert[, c(1,5,3,4,7)]; View(ResMediaNuncaCert); 
-#write.csv(ResMediaNuncaCert,'CSVFiles/ResultadosMediaNuncaCert.csv')
+write.csv(ResMediaNuncaCert,'CSVFiles/ResultadosMediaNuncaCert.csv')
 xtable(ResMediaNuncaCert,type="latex")#,file="Tablas/TablaRMediaNC.tex")
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ResMediaSiCert <- MediaIntSiCert%>% filter(MediaIntSiCert$MeanIntSiCert>=2)
 ResMediaSiCert <- ResMediaSiCert[, c(1,9,8,10,11)]; View(ResMediaSiCert); 
-#write.csv(ResMediaSiCert,'CSVFiles/ResultadosMediaIntSiCert.csv')
+write.csv(ResMediaSiCert,'CSVFiles/ResultadosMediaIntSiCert.csv')
 xtable(ResMediaSiCert,type="latex")#,file="Tablas/TablaRMediaSC.tex")
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #<<==>><<==>><<==>><<==<<==>><<==>><<==>><<==>><<==>><<==<<==>><<==>><<==>><<==>><<==>><<==<<==>><<==>>
-save.image("Repositorio/WkspreprocessingAnalisis.RData")
+save.image("Wkspaces/WkspreprocessingAnalisis.RData")
 #<<==>><<==>><<==>><<==<<==>><<==>><<==>><<==>><<==>><<==<<==>><<==>><<==>><<==>><<==>><<==<<==>><<==>>
 xtable(ResProbCertPrimera,type="latex")#,file="Tablas/TablaRPCPa.tex")
 xtable(ResProbNuncaCertPrimeros,type="latex")#,file="Tablas/TablaRPNCPa.tex")
